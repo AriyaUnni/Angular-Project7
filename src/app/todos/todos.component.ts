@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-todos',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapi:ApiService) { 
 
-  ToViewData=[]
+    this.fetchData()
+  }
+
+  fetchData =() =>{
+    this.myapi.viewdoData().subscribe(
+      (data) =>{
+        this.ToViewData=data
+      }
+    )
+  }
+
+  ToViewData:any={}
 
   ngOnInit(): void {
   }
